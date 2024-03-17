@@ -2,12 +2,20 @@
   "name": "squarecloud-manager",
   "version": "1.0.0",
   "description": "SquareCloud - Manage your squarecloud applications (This is not an official application developed by squarecloud)",
-  "main": "./dist/index.js",
+  "main": "./dist/Core/Main.js",
   "repository": "https://github.com/flaxeeydeveloper/SquareCloudManager",
   "author": "flaxeeydeveloper <https://github.com/flaxeeydeveloper>",
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "@squarecloud/api": "^3.4.3"
+    "@squarecloud/api": "^3.4.3",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "ts-node": "^10.9.2",
+    "tsc": "^2.0.4",
+    "typescript": "^5.4.2"
   }
 }

@@ -34,7 +34,7 @@ yarn # This will download all the necessary packages (dependencies).
 ### `4- ` Configure the enviroment file (.env)
 ```env
 DISCORD_TOKEN=YOUR_DISCORD_BOT_TOKEN_GOES_HERE
-DATABASE_URL=
+DATABASE_URL=YOUR_DATABASE_URL_GOES_HERE
 ```
 
 > ⚠️ Afthr this, rename the .env.example to .env (If you don't do this the bot won't work)

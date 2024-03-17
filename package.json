@@ -1,0 +1,13 @@
+{
+  "name": "squarecloud-manager",
+  "version": "1.0.0",
+  "description": "SquareCloud - Manage your squarecloud applications (This is not an official application developed by squarecloud)",
+  "main": "./dist/index.js",
+  "repository": "https://github.com/flaxeeydeveloper/SquareCloudManager",
+  "author": "flaxeeydeveloper <https://github.com/flaxeeydeveloper>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@squarecloud/api": "^3.4.3"
+  }
+}

@@ -1,10 +1,11 @@
 import HandlerManagerConfiguration from "../JSON/handlerManagerConfig.json"; /* Importing the HandlerManager Configuration File */
-import IHandlerManager from "../Interfaces/IHandlerManager"; /* Importing the created interface into the HandlerManager configuration file */
+import { IHandlerManager } from "../Interfaces/IHandlerManager"; /* Importing the created interface into the HandlerManager configuration file */
 import * as Logger from "../Components/CustomLogger"; /* Importing the Custom Logger */
 import ApplicationClient from "./ApplicationClient"; /* Importing the ApplicationClient class */
+import { readdir, readdirSync } from "fs"; /* Importing dependency necessary to perform readings */
 import { Collection } from "discord.js"; /* Importing 'collection' from discord.js (map) */
 import { resolve, join } from "path"; /* Importing dependency necessary to resolve paths, and incrementing paths in others */
-import { readdir } from "fs"; /* Importing dependency necessary to perform readings */
+import commandStructure from "../Components/CommandStructure"; /* Importing the command structure */
 
 export default class HandlerManager {
     public handlermanager_config: IHandlerManager; /* Define what is the type of handlermanager_config */
@@ -33,5 +34,25 @@ export default class HandlerManager {
                 this.ApplicationClient.on(eventName, (...args) => prepared_event.handleExecution(...args)); /* The event is already inside the client */
             });
         });
+    };
+
+    async loadCommands() { /* Function to register all commands present in the bot */
+        const foldersPath = resolve(join(this.handlermanager_config.commands_path)); /* Define where is commands path */
+        const commandsFolder = readdirSync(resolve(foldersPath)).filter(file => !(file.endsWith(".js") || file.endsWith(".ts"))); /* Resolve/Read/Filter the commands category folder */
+        for(const category of commandsFolder) {
+            const commandsPath = resolve(join(this.handlermanager_config.commands_path, category)); /* Define where the category is located */
+            const commandFiles = readdirSync(commandsPath).filter(file => (file.endsWith(".js") || file.endsWith(".ts"))); /* Resolve/Read/Filter the commands folder */
+            for(const command of commandFiles) {
+                const commandLocation = resolve(join(commandsPath, command)); /* Define where the command is located */
+                const import_command = await import(commandLocation); /* Performing the initial import of the command */
+                const command_inicialization = new import_command.default(); /* Initializing the command class */
+                const prepared_command = command_inicialization; /* Just to look aesthetically beautiful */
+                if(prepared_command instanceof commandStructure) {
+                    const data = prepared_command.builder;
+                    this.applicationCommands_body.push(data.toJSON());
+                    this.commands.set(prepared_command.internal_settings.command_name, prepared_command); /* Now the command is inside the commands map */
+                };
+            };
+        };
     };
 };

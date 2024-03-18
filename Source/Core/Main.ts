@@ -12,3 +12,5 @@ const client = new ApplicationClient({
         GatewayIntentBits.MessageContent ] /* Intention required for everything to work as expected. */
         /* Here you can add more intents, if you modify the project and are necessary! */
 });
+
+client.startServices(); /* Initialize services and initialize the application */

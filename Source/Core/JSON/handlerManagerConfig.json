@@ -1,0 +1,5 @@
+{
+    "commands_path": "./Source/Commands",
+    "events_path": "./Source/Events",
+    "registerSlashCommandsAfter": 1000
+}

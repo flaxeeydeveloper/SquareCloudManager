@@ -5,9 +5,13 @@ import "dotenv/config";
 export default class ApplicationClient extends Client {
     constructor(__clientOptions: ClientOptions) { super(__clientOptions) };
 
-    startServices() { /* Initialize the services, and initialize the application */
+    startBot() { /* Initialize the application */
+        this.login(process.env.DISCORD_TOKEN); /* Application Login  */
+    };
+
+    triggerHandlers() {
         const handlerManager = new HandlerManager(this); /* Initialize the HandlerManager class */
-        handlerManager.loadListeners();
-        this.login(process.env.DISCORD_TOKEN);
+        handlerManager.loadListeners(); /* Inicialize listeners */
+        return handlerManager; /* Return inicializated HandlerManager class */
     };
 };

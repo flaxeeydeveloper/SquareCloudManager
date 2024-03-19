@@ -1,11 +1,11 @@
 import HandlerManagerConfiguration from "../JSON/handlerManagerConfig.json"; /* Importing the HandlerManager Configuration File */
 import { IHandlerManager } from "../Interfaces/IHandlerManager"; /* Importing the created interface into the HandlerManager configuration file */
 import { Collection, REST, Routes } from "discord.js"; /* Importing 'collection/REST/Routes' from discord.js (map) */
-import * as Logger from "../Components/CustomLogger"; /* Importing the Custom Logger */
+import * as Logger from "../Helpers/CustomLogger"; /* Importing the Custom Logger */
 import ApplicationClient from "./ApplicationClient"; /* Importing the ApplicationClient class */
 import { readdir, readdirSync } from "fs"; /* Importing dependency necessary to perform readings */
 import { resolve, join } from "path"; /* Importing dependency necessary to resolve paths, and incrementing paths in others */
-import commandStructure from "../Components/CommandStructure"; /* Importing the command structure */
+import commandStructure from "../Helpers/CommandStructure"; /* Importing the command structure */
 import "dotenv/config" /* This import is necessary to read the EnvironmentFile */
 
 export default class HandlerManager {

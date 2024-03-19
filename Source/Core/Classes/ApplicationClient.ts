@@ -11,8 +11,10 @@ export default class ApplicationClient extends Client {
 
     triggerHandlers() {
         const handlerManager = new HandlerManager(this); /* Initialize the HandlerManager class */
-        handlerManager.loadCommands(); /* Load Commands */
-        handlerManager.loadListeners(); /* Inicialize listeners */
+        handlerManager.loadCommands().then(() => { /* Load/Register Commands */
+            handlerManager.loadListeners(); /* Inicialize listeners */
+        }); 
+
         return handlerManager; /* Return inicializated HandlerManager class */
     };
 };

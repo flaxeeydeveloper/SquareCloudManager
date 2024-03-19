@@ -10,6 +10,6 @@ export default class readyEvent {
     };
 
     handleExecution() {
-        console.log(`${Logger.time()} [${Logger.info(`INFO`)}] SquareCloudManager is ready to use. (${HandlerManager.commands.size} commands loaded)`)
+        console.log(`${Logger.time()} [${Logger.info(`INFO`)}] SquareCloudManager is ready to use.`)
     };
 };

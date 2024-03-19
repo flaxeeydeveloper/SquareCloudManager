@@ -56,7 +56,7 @@ export default class HandlerManager {
                     };
                 };
             };
-            
+
             try { /* Try registering slash commands */
             console.info(`${Logger.time()} [${Logger.info(`INFO`)}] Updating slash commands...`);
             
@@ -68,7 +68,7 @@ export default class HandlerManager {
             /* If an error occurs, it will return in the console */
             console.error(`${Logger.time()} [${Logger.error("ERROR")}] Unable to register slash commands at this time, please try again later, if you think this is a developer issue, please contact me on discord: "flaxeeyx"`)
             process.exit(1); /* Stopping the bot, since without the commands it cannot work */
-        };
+            };
         });
     };
 };

@@ -16,8 +16,9 @@ datasource db {
 model sqm_users {
   uuid            Int      @id @default(autoincrement())
   id              String   @unique // Discord User ID
-  password        String // Password for temporary unlocking of commands (If the password is lost, you will need to contact the developer so that we can delete your password and consequently your API key.)
-  api_key         String // SquareCloud API Key
+  features        Json
+  password        String? // Password for temporary unlocking of commands (If the password is lost, you will need to contact the developer so that we can delete your password and consequently your API key.)
+  api_key         String? // SquareCloud API Key
   blacklist       Boolean @default(false) // If a user is on the blacklist and he is the owner of a server where the bot is present, the SquareCloudManager service will be interrupted on that server in order to protect users from bad actors.
 }
 

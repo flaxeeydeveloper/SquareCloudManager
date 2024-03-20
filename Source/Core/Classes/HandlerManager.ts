@@ -3,8 +3,8 @@ import { IHandlerManager } from "../Interfaces/IHandlerManager"; /* Importing th
 import { Collection, REST, Routes } from "discord.js"; /* Importing 'collection/REST/Routes' from discord.js (map) */
 import * as Logger from "../Helpers/CustomLogger"; /* Importing the Custom Logger */
 import ApplicationClient from "./ApplicationClient"; /* Importing the ApplicationClient class */
-import { readdir, readdirSync } from "fs"; /* Importing dependency necessary to perform readings */
-import { resolve, join } from "path"; /* Importing dependency necessary to resolve paths, and incrementing paths in others */
+import { readdir, readdirSync } from "node:fs"; /* Importing dependency necessary to perform readings */
+import { resolve, join } from "node:path"; /* Importing dependency necessary to resolve paths, and incrementing paths in others */
 import commandStructure from "../Helpers/CommandStructure"; /* Importing the command structure */
 import "dotenv/config" /* This import is necessary to read the EnvironmentFile */
 

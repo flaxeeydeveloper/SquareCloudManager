@@ -1,6 +1,6 @@
 import { CommandInteraction } from "discord.js";
 import ApplicationClient from "../../Core/Classes/ApplicationClient";
-import commandStructure from "../../Core/Helpers/CommandStructure";
+import commandStructure from "../../Core/Components/CommandStructure";
 
 export default class testCommand extends commandStructure {
     constructor() {

@@ -1,6 +1,7 @@
 import { Client, ClientOptions } from "discord.js";
 import HandlerManager from "./HandlerManager";
 import "dotenv/config";
+import i18n from "../Components/Locales";
 
 export default class ApplicationClient extends Client {
     constructor(__clientOptions: ClientOptions) { super(__clientOptions) };
@@ -12,7 +13,8 @@ export default class ApplicationClient extends Client {
     triggerHandlers() {
         const handlerManager = new HandlerManager(this); /* Initialize the HandlerManager class */
         handlerManager.loadCommands().then(() => { /* Load/Register Commands */
-            handlerManager.loadListeners(); /* Inicialize listeners */
+            i18n;
+           handlerManager.loadListeners(); /* Inicialize listeners */
         }); 
 
         return handlerManager; /* Return inicializated HandlerManager class */

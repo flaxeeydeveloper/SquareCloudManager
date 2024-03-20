@@ -1,11 +1,11 @@
 import HandlerManagerConfiguration from "../JSON/handlerManagerConfig.json"; /* Importing the HandlerManager Configuration File */
-import { IHandlerManager } from "../Interfaces/IHandlerManager"; /* Importing the created interface into the HandlerManager configuration file */
+import { IHandlerManager } from "../Interfaces/HandlerManagerInterface"; /* Importing the created interface into the HandlerManager configuration file */
+import commandStructure from "../Components/CommandStructure"; /* Importing the command structure */
 import { Collection, REST, Routes } from "discord.js"; /* Importing 'collection/REST/Routes' from discord.js (map) */
-import * as Logger from "../Helpers/CustomLogger"; /* Importing the Custom Logger */
 import ApplicationClient from "./ApplicationClient"; /* Importing the ApplicationClient class */
 import { readdir, readdirSync } from "node:fs"; /* Importing dependency necessary to perform readings */
+import * as Logger from "../Components/Logger"; /* Importing the Custom Logger */
 import { resolve, join } from "node:path"; /* Importing dependency necessary to resolve paths, and incrementing paths in others */
-import commandStructure from "../Helpers/CommandStructure"; /* Importing the command structure */
 import "dotenv/config" /* This import is necessary to read the EnvironmentFile */
 
 export default class HandlerManager {
@@ -39,8 +39,8 @@ export default class HandlerManager {
 
     loadCommands() { /* Function to register all commands present in the bot */
         return new Promise(async(res, rej) => {
-            const foldersPath = resolve(join(this.handlermanager_config.commands_path)); /* Define where is commands path */
-            const commandsFolder = readdirSync(resolve(foldersPath)).filter(file => !(file.endsWith(".js") || file.endsWith(".ts"))); /* Resolve/Read/Filter the commands category folder */
+            const foldersPath = resolve(this.handlermanager_config.commands_path); /* Define where is commands path */
+            const commandsFolder = readdirSync(foldersPath).filter(file => !(file.endsWith(".js") || file.endsWith(".ts"))); /* Resolve/Read/Filter the commands category folder */
             for(const category of commandsFolder) {
                 const commandsPath = resolve(join(this.handlermanager_config.commands_path, category)); /* Define where the category is located */
                 const commandFiles = readdirSync(commandsPath).filter(file => (file.endsWith(".js") || file.endsWith(".ts"))); /* Resolve/Read/Filter the commands folder */

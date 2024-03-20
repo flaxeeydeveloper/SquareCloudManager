@@ -5,7 +5,7 @@
 */
 
 import { PermissionResolvable, CommandInteraction, PermissionsBitField, SlashCommandBuilder } from "discord.js";
-import { commandInterface } from "../Interfaces/IHandlerManager";
+import { commandInterface } from "../Interfaces/HandlerManagerInterface";
 import ApplicationClient from '../Classes/ApplicationClient';
 
 export default abstract class commandStructure {

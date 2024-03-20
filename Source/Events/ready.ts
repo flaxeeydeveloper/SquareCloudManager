@@ -1,6 +1,5 @@
 import ApplicationClient from '../Core/Classes/ApplicationClient'; /* Importing the Custom Logger */
-import * as Logger from '../Core/Helpers/CustomLogger'; /* Importing the ApplicationClient class */
-import { HandlerManager } from '../Core/Main';
+import * as Logger from '../Core/Components/Logger'; /* Importing the ApplicationClient class */
 
 export default class readyEvent {
     private ApplicationClient: ApplicationClient; /* Define what is the type of ApplicationClient */

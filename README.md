@@ -34,6 +34,7 @@ yarn # This will download all the necessary packages (dependencies).
 ### `4- ` Configure the enviroment file (.env)
 ```env
 DISCORD_TOKEN=YOUR_DISCORD_BOT_TOKEN_GOES_HERE
+DISCORD_BOT_ID=YOUR_DISCORD_BOT_ID_GOES_HERE
 DATABASE_URL=YOUR_DATABASE_URL_GOES_HERE
 ```
 

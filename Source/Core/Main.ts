@@ -22,6 +22,7 @@ flaxeeydeveloper (https://github.com/flaxeeydeveloper)
 
 
 import { GatewayIntentBits } from "discord.js";
+import * as Logger from "./Components/Logger";
 
 /* Importing the ApplicationClient class */
 import ApplicationClient from "./Classes/ApplicationClient";
@@ -36,5 +37,6 @@ const client = new ApplicationClient({
         /* Here you can add more intents, if you modify the project and are necessary! */
 });
 
+console.log(`${Logger.time()} [${Logger.warning("WARNING")}] `)
 export const HandlerManager = client.triggerHandlers(); /* Trigger Handlers and export them */
 client.startBot(); /* Initialize services and initialize the application */

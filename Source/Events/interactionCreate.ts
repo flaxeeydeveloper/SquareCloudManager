@@ -21,7 +21,7 @@ export default class readyEvent {
         try {
             findCommand.handleExecution(this.ApplicationClient, interaction); /* Execute command */
         } catch(e) {
-            console.error(`${Logger.time()} [${Logger.error("ERROR")}] Unable to run command '${findCommand.internal_settings.command_name}': \n`+e);
+            console.error(`${Logger.time()} [${Logger.error("ERROR")}] Event: Unable to run command '${findCommand.internal_settings.command_name}': \n`+e);
         };
     };
 };

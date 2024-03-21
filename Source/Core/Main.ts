@@ -1,7 +1,7 @@
 /*
-⚠ IMPORTANT DISCLAIMER ⚠:
+⚠️ IMPORTANT DISCLAIMER ⚠️
 
-⚠ ATTENTION: This project utilizes an open-source codebase created by me, Flaxeey. 
+ATTENTION: This project utilizes an open-source codebase created by me, Flaxeey. 
 While it has been developed with the intention of providing a secure and efficient solution,
 I cannot be held liable for any misuse or consequences resulting from the improper use of this application.
 
@@ -22,10 +22,11 @@ flaxeeydeveloper (https://github.com/flaxeeydeveloper)
 
 
 import { GatewayIntentBits } from "discord.js";
-import * as Logger from "./Components/Logger";
 
 /* Importing the ApplicationClient class */
 import ApplicationClient from "./Classes/ApplicationClient";
+import i18n from "./Components/Locales";
+import prisma from "./Components/Prisma";
 
 /* Initializing the ApplicationClient class */
 const client = new ApplicationClient({ 
@@ -37,6 +38,9 @@ const client = new ApplicationClient({
         /* Here you can add more intents, if you modify the project and are necessary! */
 });
 
-console.log(`${Logger.time()} [${Logger.warning("WARNING")}] `)
+i18n;
+
+client.prisma = prisma;
 export const HandlerManager = client.triggerHandlers(); /* Trigger Handlers and export them */
 client.startBot(); /* Initialize services and initialize the application */
+

@@ -22,7 +22,7 @@ export function LocalesLoader() {
                 resources[locale][file.split(".")[0]] = rfile;
             };
 
-            console.info(`${Logger.time()} [${Logger.info("INFO")}] Loading locale '${locale}'.`); /* Notify in the console that the locale has been loaded */
+            console.info(`${Logger.time()} [${Logger.info("INFO")}] LocalesLoader: Loading locale '${locale}'.`); /* Notify in the console that the locale has been loaded */
         };
         res(resources);
     });

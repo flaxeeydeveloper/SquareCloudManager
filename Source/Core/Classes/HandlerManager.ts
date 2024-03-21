@@ -23,7 +23,7 @@ export default class HandlerManager {
     loadListeners() { /* Function to record all events present in the folder defined in the configuration file */
         readdir(resolve(this.handlermanager_config.events_path), (err, files) => { /* Starting reading from the defined path */
             if(err) {
-                console.error(`${Logger.time()} [${Logger.error(`ERROR`)}] An error occurred when trying to read the folder responsible for storing the events, if you are unable to do this, try calling me on discord so I can help you with this. (Discord: flaxeeyx)`); /* Error Message */
+                console.error(`${Logger.time()} [${Logger.error(`ERROR`)}] ListenersLoader: An error occurred when trying to read the folder responsible for storing the events, if you are unable to do this, try calling me on discord so I can help you with this. (Discord: flaxeeyx)`); /* Error Message */
                 process.exit(1); /* Stopping the bot, since without the events it cannot work */
             };
             files.forEach(async(event) => { /* Preparing events to register them on the client */
@@ -31,7 +31,7 @@ export default class HandlerManager {
                 const event_inicialization = new import_event.default(this.ApplicationClient); /* Initializing the event class */
                 const prepared_event = event_inicialization; /* Just to look aesthetically beautiful */
                 const eventName = event.split(".")[0]; /* Capturing only the event name */
-                console.info(`${Logger.time()} [${Logger.info(`INFO`)}] The event '${eventName}' has been loaded.`); /* Notify in the console that the command has been loaded */
+                console.info(`${Logger.time()} [${Logger.info(`INFO`)}] ListenersLoader: The event '${eventName}' has been loaded.`); /* Notify in the console that the command has been loaded */
                 this.ApplicationClient.on(eventName, (...args) => prepared_event.handleExecution(...args)); /* The event is already inside the client */
             });
         });
@@ -58,15 +58,15 @@ export default class HandlerManager {
             };
 
             try { /* Try registering slash commands */
-            console.info(`${Logger.time()} [${Logger.info(`INFO`)}] Updating slash commands...`);
+            console.info(`${Logger.time()} [${Logger.info(`INFO`)}] SlashCommandsController: Updating slash commands...`);
             
             const rest = new REST().setToken(process.env.DISCORD_TOKEN); /* Build and prepare REST */
             const data = await rest.put(Routes.applicationCommands(process.env.DISCORD_BOT_ID), { body: this.applicationCommands_body});
-            console.info(`${Logger.time()} [${Logger.info(`INFO`)}] The slash commands have been updated successfully.`);
+            console.info(`${Logger.time()} [${Logger.info(`INFO`)}] SlashCommandsController: The slash commands have been updated successfully.`);
             res(this.commands);
             } catch(e) {
             /* If an error occurs, it will return in the console */
-            console.error(`${Logger.time()} [${Logger.error("ERROR")}] Unable to register slash commands at this time, please try again later, if you think this is a developer issue, please contact me on discord: "flaxeeyx"`)
+            console.error(`${Logger.time()} [${Logger.error("ERROR")}] SlashCommandsController: Unable to register slash commands at this time, please try again later, if you think this is a developer issue, please contact me on discord: "flaxeeyx"`)
             process.exit(1); /* Stopping the bot, since without the commands it cannot work */
             };
         });

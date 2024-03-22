@@ -38,7 +38,7 @@ export default class HandlerManager {
     };
 
     loadCommands() { /* Function to register all commands present in the bot */
-        return new Promise(async(res, rej) => {
+        return new Promise(async(res) => {
             const foldersPath = resolve(this.handlermanager_config.commands_path); /* Define where is commands path */
             const commandsFolder = readdirSync(foldersPath).filter(file => !(file.endsWith(".js") || file.endsWith(".ts"))); /* Resolve/Read/Filter the commands category folder */
             for(const category of commandsFolder) {

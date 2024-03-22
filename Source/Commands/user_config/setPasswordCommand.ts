@@ -17,6 +17,6 @@ export default class setAPIKeyCommand extends commandStructure {
     };
     
     async handleExecution(client: ApplicationClient, interaction: CommandInteraction) {
-        
+        interaction.reply(`OK`)
     }
 }

@@ -4,6 +4,7 @@
     I am not responsible for errors if this file is modified.
 */
 
-export default interface Resources {
-    [key: string]: any; /* This is part of the project structure, it is not necessary to modify it */
-}
+export default interface CacheDataInterface { 
+    value: any; /* This is part of the project structure, it is not necessary to modify it */
+    expiresAt: number; /* This is part of the project structure, it is not necessary to modify it */
+};

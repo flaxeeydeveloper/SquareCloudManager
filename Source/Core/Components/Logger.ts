@@ -4,7 +4,6 @@
     I am not responsible for errors if this file is modified.
 */
 
-
 export function info(message: string) {
     return formatLog('INFO', message, '34');
   }

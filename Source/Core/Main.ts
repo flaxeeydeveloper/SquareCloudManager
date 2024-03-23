@@ -25,7 +25,6 @@ import { GatewayIntentBits } from "discord.js";
 
 /* Importing the ApplicationClient class */
 import ApplicationClient from "./Classes/ApplicationClient";
-import i18n from "./Components/Locales";
 import prisma from "./Components/Prisma";
 
 /* Initializing the ApplicationClient class */
@@ -37,8 +36,6 @@ const client = new ApplicationClient({
         GatewayIntentBits.MessageContent ] /* Intention required for everything to work as expected. */
         /* Here you can add more intents, if you modify the project and are necessary! */
 });
-
-i18n;
 
 client.prisma = prisma;
 export const HandlerManager = client.triggerHandlers(); /* Trigger Handlers and export them */

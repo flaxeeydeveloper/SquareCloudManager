@@ -16,6 +16,6 @@
     "resolveJsonModule": true,
     "importHelpers": true
   },
-  "include": ["Source"],
+  "include": ["Source", "Source/Core/Locales/resources.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

@@ -11,7 +11,7 @@ import { hashPassword } from "../../Core/Components/Encryptation";
 import * as Logger from '../../Core/Components/Logger';
 import type { sqm_users as UserType } from "@prisma/client";
 
-export default class setAPIKeyCommand extends commandStructure {
+export default class setPasswordCommand extends commandStructure {
     constructor() {
         super({
             command_name: "set-password",
@@ -46,7 +46,7 @@ export default class setAPIKeyCommand extends commandStructure {
                     password: hashedPassword
                 }
             }).then(() => {
-                return interaction.reply({ content: `\`✅ Your password has been set successfully (${password.length} characters) ||[${password}]||\``, ephemeral: true})
+                return interaction.reply({ content: `\`✅ Your password has been set successfully (${password.length} characters) [${password}]\``, ephemeral: true})
             }).catch((e) => {
                 console.error(`${Logger.time()} ${Logger.error("ERROR")} Unable to save a user to the database: \n`+e)
                 return interaction.reply({ content: `\`❌ We were unable to update your account at this time, please try again later!\``, ephemeral: true})
@@ -61,7 +61,7 @@ export default class setAPIKeyCommand extends commandStructure {
                     password: hashedPassword
                 }
             }).then(() => {
-                return interaction.reply({ content: `\`✅ Your password has been set successfully (${password.length} characters) ||[${password}]||\``, ephemeral: true})
+                return interaction.reply({ content: `\`✅ Your password has been set successfully (${password.length} characters) [${password}]\``, ephemeral: true})
             }).catch((e) => {
                 console.error(`${Logger.time()} ${Logger.error("ERROR")} Unable to save a user to the database: \n`+e)
                 return interaction.reply({ content: `\`❌ We were unable to create your account at this time, please try again later!\``, ephemeral: true})

@@ -7,11 +7,11 @@
 import { CommandInteraction } from "discord.js";
 import ApplicationClient from "../../Core/Classes/ApplicationClient";
 import commandStructure from "../../Core/Components/CommandStructure";
-import { hashPassword, comparePassword } from "../../Core/Components/Encryptation";
+import { hashPassword, comparePassword, API_KEY_DecryptationHelper } from "../../Core/Components/Encryptation";
 import * as Logger from '../../Core/Components/Logger';
 import type { sqm_users as UserType } from "@prisma/client";
 
-export default class setAPIKeyCommand extends commandStructure {
+export default class changePasswordCommand extends commandStructure {
     constructor() {
         super({
             command_name: "change-password",
@@ -55,7 +55,7 @@ export default class setAPIKeyCommand extends commandStructure {
                 password: newHashedPassword
             }
         }).then(() => {
-            return interaction.reply({ content: `\`✅ Your password has been set successfully (${newPassword.length} characters) ||[${newPassword}]||\``, ephemeral: true})
+            return interaction.reply({ content: `\`✅ Your password has been set successfully (${newPassword.length} characters) [${newPassword}]\``, ephemeral: true})
         }).catch((e) => {
             console.error(`${Logger.time()} ${Logger.error("ERROR")} Unable to save a user to the database: \n`+e)
             return interaction.reply({ content: `\`❌ Unable to complete password change at this time, please try again later\``, ephemeral: true})

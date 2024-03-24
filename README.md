@@ -14,8 +14,7 @@ With this application you can:
 - [] Back up your application (if your plan allows it);
 - [] Is it possible to upload/commit via Discord;
 
-> ⚠️ Other functions are still under development.
-> ⚠️ It is important to remember that errors can happen, and your report is necessary so that the problem can be resolved.
+> ⚠️ It is important to remember that errors can happen, and your report is necessary so that the problem can be resolved (Some functions are still under development).
 
 ---
 ### 🤔 How to install?

@@ -7,12 +7,14 @@ This project was created using the [official api](https://github.com/squarecloud
 ---
 
 With this application you can:
-- [x] Start/Restart/Stop your application;
-- [x] View logs from your hosted application;
-- [x] View the file structure of your application;
-- [x] Back up your application (if your plan allows it);
-- [x] Is it possible to upload/commit via Discord;
+- [x] View your account details;
+- [] Start/Restart/Stop your application;
+- [] View logs from your hosted application;
+- [] View the file structure of your application;
+- [] Back up your application (if your plan allows it);
+- [] Is it possible to upload/commit via Discord;
 
+> ⚠️ Other functions are still under development.
 > ⚠️ It is important to remember that errors can happen, and your report is necessary so that the problem can be resolved.
 
 ---

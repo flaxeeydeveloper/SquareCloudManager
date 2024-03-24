@@ -16,7 +16,6 @@
     "dayjs": "^1.11.10",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
-    "i18next": "^23.10.1",
     "i18next-fs-backend": "^2.3.1",
     "prisma": "^5.11.0"
   },
@@ -24,7 +23,6 @@
     "@biomejs/biome": "^1.6.1",
     "@types/bcrypt": "^5.0.2",
     "@types/dotenv": "^8.2.0",
-    "@types/i18next": "^13.0.0",
     "ts-node": "^10.9.2",
     "tsc": "^2.0.4",
     "typescript": "^5.4.2"

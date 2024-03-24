@@ -4,7 +4,6 @@ import * as Logger from '../Core/Components/Logger'; /* Importing the Applicatio
 import { HandlerManager } from '../Core/Main'; /* Import required to capture registered commands */
 import { Interaction, EmbedBuilder, CommandInteraction } from 'discord.js';
 import type { sqm_users as UserType } from '@prisma/client' /* Import Users type */
-import { t } from "i18next";
 
 export default class readyEvent {
     private ApplicationClient: ApplicationClient;

@@ -9,7 +9,7 @@ import ApplicationClient from "../../Core/Classes/ApplicationClient";
 import commandStructure from "../../Core/Components/CommandStructure"; 
 import * as Logger from '../../Core/Components/Logger';
 
-export default class authenticateCommand extends commandStructure {
+export default class profileCommand extends commandStructure {
     constructor() {
         super({
             command_name: "profile",

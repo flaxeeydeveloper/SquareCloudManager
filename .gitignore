@@ -3,5 +3,6 @@ dist/
 
 Source/Core/test.ts
 Source/Core/test.js
+functionabilities.txt
 
 .env

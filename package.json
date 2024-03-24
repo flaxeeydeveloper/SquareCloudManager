@@ -30,6 +30,7 @@
     "typescript": "^5.4.2"
   },
   "scripts": {
-    "sqm_application": "ts-node ./Source/Core/Main.ts"
+    "sqm_application_wp": "ts-node ./Source/Core/Main.ts",
+    "sqm_application": "prisma db push && ts-node ./Source/Core/Main.ts"
   }
 }

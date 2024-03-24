@@ -38,12 +38,14 @@ export default class setAPIKeyCommand extends commandStructure {
     async handleExecution(client: ApplicationClient, interaction: CommandInteraction) {
         const apikey = interaction.options.get('api_key').value.toString();
         const password = interaction.options.get('password').value.toString();
+        await interaction.deferReply({ ephemeral: true });
+
         const findUser: UserType = await client.prisma.sqm_users.findUnique({ where: { id: interaction.user.id }});
         const match = await comparePassword(password, findUser.password);
-        if(!match) return interaction.reply({ content: `\`❌ Unable to authenticate, password is incorrect!\``, ephemeral: true});
+        if(!match) return interaction.editReply({ content: `<:admin_purple:1211125198460551169> [SquareManager Guard] \`Your password is incorrect, please ensure you are using the correct password and try again.\``});
 
         await fetch('https://api.squarecloud.app/v2/user', {method: 'GET', headers: {Authorization: apikey}}).then((response) => response.json()).then(async(response: any) => {
-        if(response.status === 'error' && response.code === 'ACCESS_DENIED') return interaction.reply({ content: `\`❌ Your SquareCloud API Key is invalid!\``, ephemeral: true})
+        if(response.status === 'error' && response.code === 'ACCESS_DENIED') return interaction.editReply({ content: `<:admin_purple:1211125198460551169> [SquareManager Guard] \`Your SquareCloud API key is invalid, generate another key and try again.\``})
         const encryptedkey = API_KEY_EncryptationHelper(interaction.user.id, apikey, password);
         
         await client.prisma.sqm_users.update({ 
@@ -54,15 +56,13 @@ export default class setAPIKeyCommand extends commandStructure {
                 api_key: encryptedkey
             }
         }).then(() => { 
-            return interaction.reply({ content: `\`✅ Your api key has been set successfully.\``, ephemeral: true})
+            return interaction.editReply({ content: `<:admin_purple:1211125198460551169> [SquareManager Guard] \`Your SquareCloud API key has been encrypted and saved to the database!\``})
         }).catch((e) => {
             console.error(`${Logger.time()} ${Logger.error("ERROR")} Unable to save a user to the database: \n`+e)
-            return interaction.reply({ content: `\`❌ We were unable to update your account at this time, please try again later!\``, ephemeral: true})
+            return interaction.editReply({ content: `<:admin_purple:1211125198460551169> [SquareManager Guard] \`Unable to update your data in this moment, try again later.\``});
         });
     }).catch((err) => {
-            return interaction.reply({ content: `\`❌ SquareCloud service is temporarily offline!\``, ephemeral: true})
+        return interaction.editReply({ content: `<:admin_purple:1211125198460551169> [SquareManager Guard] \`SquareCloudAPI is experiencing problems at the moment.\``})
         });
     };
 };
-
-// return interaction.reply({ content: `\`✅ Your API key is valid!\``, ephemeral: true})

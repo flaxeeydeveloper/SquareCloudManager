@@ -40,12 +40,13 @@ export default class changePasswordCommand extends commandStructure {
     async handleExecution(client: ApplicationClient, interaction: CommandInteraction) {
         const oldPassword = interaction.options.get('old-password').value.toString();
         const newPassword = interaction.options.get('new-password').value.toString();
+        await interaction.deferReply({ ephemeral: true });
+
         const newHashedPassword = hashPassword(newPassword);
-        
         const findUser: UserType = await client.prisma.sqm_users.findUnique({ where: { id: interaction.user.id }});
         const match = await comparePassword(oldPassword, findUser.password)
 
-        if(!match) return interaction.reply({ content: `\`❌ We can't change your password because you got the old password wrong!\``, ephemeral: true})
+        if(!match) return interaction.editReply({ content: `<:admin_purple:1211125198460551169> [SquareManager Guard] \`Your password is incorrect, please ensure you are using the correct password and try again.\``})
     
         await client.prisma.sqm_users.update({
             where: {
@@ -55,10 +56,10 @@ export default class changePasswordCommand extends commandStructure {
                 password: newHashedPassword
             }
         }).then(() => {
-            return interaction.reply({ content: `\`✅ Your password has been set successfully (${newPassword.length} characters) [${newPassword}]\``, ephemeral: true})
+            return interaction.editReply({ content: `<:admin_purple:1211125198460551169> [SquareManager Guard] \`Your new password has been set successfully.\``})
         }).catch((e) => {
-            console.error(`${Logger.time()} ${Logger.error("ERROR")} Unable to save a user to the database: \n`+e)
-            return interaction.reply({ content: `\`❌ Unable to complete password change at this time, please try again later\``, ephemeral: true})
+            console.error(`${Logger.time()} ${Logger.error("ERROR")} Unable to update user to the database: \n`+e)
+            return interaction.editReply({ content: `<:admin_purple:1211125198460551169> [SquareManager Guard] \`Unable to complete changes at this time, please try again later.\``})
         });
     };
 };

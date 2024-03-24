@@ -33,10 +33,11 @@ export default class setPasswordCommand extends commandStructure {
     
     async handleExecution(client: ApplicationClient, interaction: CommandInteraction) {
         const password = interaction.options.get('password').value.toString();
+        await interaction.deferReply({ ephemeral: true });
+
         const hashedPassword = hashPassword(password);
-        
         const findUser: UserType = await client.prisma.sqm_users.findUnique({ where: { id: interaction.user.id }});
-        if(findUser && findUser.password) return interaction.reply({ content: `👀 You already have a password set, you need to reset it with the '/change-password' command, using your old password.`, ephemeral: true })
+        if(findUser && findUser.password) return interaction.editReply({ content: `👀 You already have a password set, you need to reset it with the '/change-password' command, using your old password.`})
         if(findUser && !findUser.password) {
             await client.prisma.sqm_users.update({
                 where: {
@@ -46,10 +47,10 @@ export default class setPasswordCommand extends commandStructure {
                     password: hashedPassword
                 }
             }).then(() => {
-                return interaction.reply({ content: `\`✅ Your password has been set successfully (${password.length} characters) [${password}]\``, ephemeral: true})
+                return interaction.editReply({ content: `\`✅ Your password has been set successfully (${password.length} characters) [${password}]\``})
             }).catch((e) => {
                 console.error(`${Logger.time()} ${Logger.error("ERROR")} Unable to save a user to the database: \n`+e)
-                return interaction.reply({ content: `\`❌ We were unable to update your account at this time, please try again later!\``, ephemeral: true})
+                return interaction.editReply({ content: `\`❌ We were unable to update your account at this time, please try again later!\``})
             });
         }
 
@@ -61,10 +62,10 @@ export default class setPasswordCommand extends commandStructure {
                     password: hashedPassword
                 }
             }).then(() => {
-                return interaction.reply({ content: `\`✅ Your password has been set successfully (${password.length} characters) [${password}]\``, ephemeral: true})
+                return interaction.editReply({ content: `\`✅ Your password has been set successfully (${password.length} characters) [${password}]\``})
             }).catch((e) => {
                 console.error(`${Logger.time()} ${Logger.error("ERROR")} Unable to save a user to the database: \n`+e)
-                return interaction.reply({ content: `\`❌ We were unable to create your account at this time, please try again later!\``, ephemeral: true})
+                return interaction.editReply({ content: `\`❌ We were unable to create your account at this time, please try again later!\``})
             });
         }
     };

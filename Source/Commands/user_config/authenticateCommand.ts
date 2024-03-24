@@ -34,26 +34,17 @@ export default class authenticateCommand extends commandStructure {
     
     async handleExecution(client: ApplicationClient, interaction: CommandInteraction) {
         const password = interaction.options.get('password').value.toString();
+        await interaction.deferReply({ ephemeral: true });
         const findUser: UserType = await client.prisma.sqm_users.findUnique({ where: { id: interaction.user.id }});
         const match = await comparePassword(password, findUser.password);
-        if(!match) return interaction.reply({ content: `\`❌ Unable to authenticate, password is incorrect!\``, ephemeral: true});
-
-        await client.prisma.sqm_users.update({ 
-            where: {
-                id: interaction.user.id
-            },
-            data: {
-                lastLogin: dayjs().toString()
-            }
-        }).then((data: UserType) => {
-            if(data.api_key) {
-                const decryptedAPIKEY = API_KEY_DecryptationHelper(interaction.user.id, data.api_key, password);
-                client.cache._set(`${interaction.user.id}/authentication`, decryptedAPIKEY, 60);
-            }
-            return interaction.reply({ content: `\`✅ You are authenticated, you have free use of commands for 25 minutes.\``, ephemeral: true})
-        }).catch((e) => {
-            console.error(`${Logger.time()} ${Logger.error("ERROR")} Unable to save a user to the database: \n`+e)
-            return interaction.reply({ content: `\`❌ Unable to  authenticate at this time, please try again later\``, ephemeral: true})
-        });
+        if(!match)  return interaction.editReply({ content: `<:admin_purple:1211125198460551169> [SquareManager Guard] \`Your password is incorrect, please ensure you are using the correct password and try again.\``});
+        if(findUser.api_key) {
+            const decryptedAPIKEY = API_KEY_DecryptationHelper(interaction.user.id, findUser.api_key, password);
+            client.cache._set(`${interaction.user.id}/authentication`, decryptedAPIKEY, 1500 );
+            return interaction.editReply({ content: `<:admin_purple:1211125198460551169> [SquareManager Guard] \`You have been successfully authenticated, you can now use commands that interact with your SquareCloud account.\``})
+        } else {
+            return interaction.editReply({ content: `<:admin_purple:1211125198460551169> [SquareManager Guard] \`You haven't yet set your api key with the '/api' command.\``})
+        };
+        
     };
 };
